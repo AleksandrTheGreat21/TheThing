@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cart</title>
-</head>
-<body>
-
-<h1>Cart</h1>
-
-<script>
-    // Function to get URL parameters
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+function getCookie(name) {
+    var cookieArr = document.cookie.split("; ");
+    for (var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        if (name === cookiePair[0]) {
+            return cookiePair[1];
+        }
     }
+    return null;
+}
 
-    // Get the values of x and y from the URL parameters
-    var xValue = getParameterByName('x');
-    var yValue = getParameterByName('y');
-
-    // Display the values on the page
-    document.write("<p>X value: " + xValue + "</p>");
-    document.write("<p>Y value: " + yValue + "</p>");
-</script>
-
-</body>
-</html>
+window.onload = function() {
+    var x = getCookie("x");
+    var y = getCookie("y");
+    if (x !== null && y !== null) {
+        // Do something with x and y, for example, display them on the page
+        document.getElementById("x_value").innerText = x;
+        document.getElementById("y_value").innerText = y;
+    } else {
+        // Cookies not found or not set, handle accordingly
+        console.log("Cookies not found");
+    }
+}
