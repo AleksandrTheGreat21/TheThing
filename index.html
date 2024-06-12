@@ -1,69 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cart Page</title>
-</head>
-<body>
-
 <script>
-// Function to set cookie
-function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+x=0;
+y=0;
+function setCookieAndRedirect() {
+    var x = document.getElementById("x").value;
+    var y = document.getElementById("y").value;
+    document.cookie = "x=" + x + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    document.cookie = "y=" + y + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    window.location.href = "Cart.html?x=" + x + "&y=" + y;
 }
-
-// Function to get cookie
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-// Function to increment x and update the element and set cookie
-function incrementX() {
-    x++;
-    document.getElementById("my_p").innerText = x;
-    setCookie("x", x, 1); // Set cookie with name "x" and value of x, expires in 1 day
-}
-
-// Function to increment y and update the element and set cookie
-function incrementY() {
-    y++;
-    document.getElementById("my_p2").innerText = y;
-    setCookie("y", y, 1); // Set cookie with name "y" and value of y, expires in 1 day
-}
-
-// Initialize x and y from cookies if they exist
-var x = parseInt(getCookie("x")) || 0;
-var y = parseInt(getCookie("y")) || 0;
-
-// Update the elements with the initial values
-document.getElementById("my_p").innerText = x;
-document.getElementById("my_p2").innerText = y;
 </script>
 
 
-<button type="button" onclick='incrementX();'>Item 1</button>
+<button type="button" onclick='document.getElementById("my_p").innerText=++x;'>Item 1</button>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<button type="button" onclick='incrementY();'>Item 2</button>
+<button type="button" onclick='document.getElementById("my_p2").innerText=++y;'>Item 2</button>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<button type="button" onclick='window.location.href="Cart.html"'>Go To Cart!</button>
+<button type="button" onclick='window.location.href="Cart.html"'>Go To Cart</button>
 
 <br/>
 <br/>
@@ -72,6 +28,3 @@ document.getElementById("my_p2").innerText = y;
 <p id="my_p">0</p>
 
 <p id="my_p2">0</p>
-
-</body>
-</html>
